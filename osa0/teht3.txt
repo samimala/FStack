@@ -1,0 +1,44 @@
+﻿title Navigointi muistiinpanoihin
+
+Käyttäjä->Selain:
+
+note right of Käyttäjä:
+Käyttäjä kirjoittaa osoiteriville
+ https://fullstack-exampleapp.herokuapp.com/notes
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+note left of Palvelin:
+Palvelimessa muodostetaan html-koodin sisältävä sivu
+end note 
+
+Palvelin->Selain: status 200, sivun HTML-koodi
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+note right of Selain:
+Selain löysi css-linkiin, ja pyytää palvelimelta 
+css-tiedostoa
+end note
+
+Palvelin->Selain: status 200, css-koodi
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/main.js
+note right of Selain:
+Selain löysi js-linkiin, ja pyytää palvelimelta 
+css-tiedostoa
+end note
+
+Palvelin->Selain: status 200, js-koodi
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+note right of Selain:
+Selain suoritti lataamansa js-koodin, mikä aiheuttaa 
+muistiinpanojen kysymisen
+end note
+
+Palvelin->Selain: status 200, js-koodi
+
+note left of Selain:
+Selain muodostaa sivun muitoilemalla html css:n mukaan
+ja js-koodi lisää siihen muistiinpanot
+end note
