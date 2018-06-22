@@ -1,0 +1,71 @@
+title Muistiinpanon lisäys
+
+Käyttäjä->Selain: Uusi muistiinpano
+note right of Käyttäjä:
+ Käyttäkä kirjoittaa uuden muistiinpanon, ja 
+ painaa talleta-nappia. 
+end note
+
+Selain->Palvelin: POST fullstack-exampleapp.herokuapp.com/new_note
+note right of Selain:
+ Selain lähettää kirjoitetun viestin POST-sanomassa palvelimelle
+end note
+Palvelin->Selain: Status 302 Location /notes
+note left of Palvelin:
+ Palvelin lähettää Status 302:n, ja Location-parametrissa on
+ /notes. Tämä on pyyntö lähettää uusi sanoma POST/GET uuteen
+ osoitteeseen.
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+note right of Selain:
+ Selain lähettää sivupyynnön uudelleen ohjatulle palvelimelle
+end note
+
+Palvelin->Selain: Status 200
+note left of Palvelin:
+ Palvelin lähettää uuden muistiinpanosivun
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/notes
+note right of Selain:
+ Selain lähettää sivupyynnön uudelleen ohjatulle palvelimelle
+end note
+
+Palvelin->Selain: Status 200
+note left of Palvelin:
+ Palvelin lähettää uuden muistiinpanosivun
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+note right of Selain:
+ Selain löytää html-sivusta main.css-linkin
+ ja pyytää sitä palvelimelta
+end note
+
+Palvelin->Selain: Status 200
+note left of Palvelin:
+ Palvelin lähettää pyydetyn datan
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/main.js
+note right of Selain:
+ Selain löytää html-sivusta main.js-
+ linkin ja pyytää sitä palvelimelta
+end note
+
+Palvelin->Selain: Status 200
+note left of Palvelin:
+ Palvelin lähettää pyydetyn datan
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+note right of Selain:
+ Selain suorittaa scripting, joka sisältää
+ komennon hakea json-muotoiset muistiinpanot
+end note
+
+Palvelin->Selain: Status 200
+note left of Palvelin:
+ Palvelin lähettää uuden muistiinpanosivun
+end note
