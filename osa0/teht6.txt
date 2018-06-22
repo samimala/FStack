@@ -1,0 +1,22 @@
+title spa muistiinpanon lisäys
+
+Käyttäjä->Selain:
+note right of Käyttäjä:
+  Käyttäjä kirjoittaauuden muistiinpanon, ja
+  painaa "Talleta"-nappia. JavaScript koodi estää
+  selaimen normaalin submit-toiminnan. Koodi lisää kirjoitetun
+  muistiinpanon suoraan selaimen näyttämälle sivulle, 
+  ja lähettää sen sen jälkeen POST-sanomalla palvelimelle.
+  
+  Ohjelma ei lataa mahdollisesta toisesta selaimesta 
+  sivun latauksen jälkeen lähettettyjä muistiinpanoja.
+end note
+
+Selain->Palvelin: POST fullstack-exampleapp.herokuapp.com/new_note_spa
+
+Palvelin->Selain: Status 201
+
+note left of Palvelin
+  Palvelin kuitttaa saaneensa muistiinpanon
+end note
+

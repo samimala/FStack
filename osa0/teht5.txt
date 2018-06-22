@@ -1,0 +1,47 @@
+title spa
+
+Käyttäjä->Selain:
+note right of Käyttäjä:
+  Käyttäjä kirjoittaa osoiteriville
+  fullstack-exampleapp.herokuapp.com/spa
+end note
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/spa
+
+note right of Selain:
+  SElain pyytää palvelimelta käyttäjän 
+  haluaman sivun
+end note 
+
+Palvelin->Selain: Status 200 sivun html-koodi
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/main.css
+note right of Selain:
+    Selain sai html-sivun, ja löytää siitä ensimmäisenä
+    linkin css-tyylitiedostoon, ja pyytää sitä palvelimelta
+end note
+
+Palvelin->Selain: Status 200 css-tyylitiedosto
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/spa.js
+note right of Selain:
+  Seuraavaksi selain löytää linkin javascript-tiedostoon, ja
+  pyytää sitä palvelimelta
+end note
+
+Palvelin->Selain: Status 200 js-kooditiedosto
+
+Selain->Palvelin: GET fullstack-exampleapp.herokuapp.com/data.json
+
+note right of Selain
+  Selain suoritti lataamansa javascriptin, ja siellä
+  ollut json-tiedoston latauskomento sai selaamaan 
+  pyytämään palvelimelta kyseistä tiedostoa
+end note
+
+Palvelin->Selain: Status 200 json-data
+
+note left of Selain:
+  SElain muodostaa lopullisen sivun,ja
+  näyttää sen käyttäjälle
+end note
