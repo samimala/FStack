@@ -1,21 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selected: 0
+      selected: 0,
+      pisteet: new Array(anecdotes.length)   
     }
+    
+    for (let i=0; i<anecdotes.length; i++) this.state.pisteet[i] = 0
   }
 
- 
+  addVote() {
+    let uudetPisteet = this.state.pisteet
+    uudetPisteet[this.state.selected]++;
+    this.setState({pisteet: uudetPisteet})
+  }
+
+  
   render() {
     return (
       <div>
         <div>{this.props.anecdotes[this.state.selected]}</div>
-        <div><button onClick={()=>this.setState({selected: getNextIdx()})}>next anecdote</button></div>
+        <div>has {this.state.pisteet[this.state.selected]} votes</div>
+          <div>
+              <button onClick={()=>this.addVote()}>vote</button>
+              <button onClick={()=>this.setState({selected: getNextIdx()})}>next anecdote</button>
+          </div>
       </div>
     )
   }
@@ -35,6 +47,7 @@ const anecdotes = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
+
 
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
