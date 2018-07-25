@@ -10,9 +10,10 @@ const Button = ({handleClick, text}) => {
 
 const Statistic = ({text,value, posttext}) =>  {
   return (
-    <div>
-      {text}: {value} {posttext}
-    </div>
+    <React.Fragment>
+      <td> {text} </td> 
+      <td> {value} {posttext} </td>
+     </React.Fragment>
   )
 }
 
@@ -31,11 +32,25 @@ const Statistics = ({hyvat,huonot,neutraalit}) =>  {
   return (
     <div>
       <h1>statistiikka</h1>
-      <Statistic text="hyvä" value={hyvat} />
-      <Statistic text="neutraali" value={neutraalit} />
-      <Statistic text="huono" value={huonot} />
-      <Statistic text="keskiarvo" value={keskiarvo.toFixed(1)} />
-      <Statistic text="positiivisia" value={positiiviset.toFixed(1)} posttext="%"/>
+      <table>
+        <tbody>
+          <tr>
+          <Statistic text="hyvä" value={hyvat} />
+          </tr>
+          <tr>
+          <Statistic text="neutraali" value={neutraalit} />
+          </tr>
+          <tr>
+          <Statistic text="huono" value={huonot} />
+          </tr>
+          <tr>
+          <Statistic text="keskiarvo" value={keskiarvo.toFixed(1)} />
+          </tr>
+          <tr>
+           <Statistic text="positiivisia" value={positiiviset.toFixed(1)} posttext="%"/>
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
