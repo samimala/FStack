@@ -2,106 +2,41 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-const Button = ({handleClick, text}) => {
-  return (
-    <button onClick={handleClick}>{text}</button>
-  )
-}
-
-const Statistic = ({text,value, posttext}) =>  {
-  return (
-    <React.Fragment>
-      <td> {text} </td> 
-      <td> {value} {posttext} </td>
-     </React.Fragment>
-  )
-}
-
-const Statistics = ({hyvat,huonot,neutraalit}) =>  {
-  let maara = hyvat + neutraalit + huonot
-  let keskiarvo = (hyvat-huonot)/maara
-  let positiiviset = hyvat*100/maara
-  if (maara===0) {
-    return(
-      <div>
-        <h1>stataistiikka</h1>
-        <div>ei yhtään palautetta annnettu</div>
-      </div>
-    )
-  }
-  return (
-    <div>
-      <h1>statistiikka</h1>
-      <table>
-        <tbody>
-          <tr>
-          <Statistic text="hyvä" value={hyvat} />
-          </tr>
-          <tr>
-          <Statistic text="neutraali" value={neutraalit} />
-          </tr>
-          <tr>
-          <Statistic text="huono" value={huonot} />
-          </tr>
-          <tr>
-          <Statistic text="keskiarvo" value={keskiarvo.toFixed(1)} />
-          </tr>
-          <tr>
-           <Statistic text="positiivisia" value={positiiviset.toFixed(1)} posttext="%"/>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  )
-}
-
-
 class App extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      hyva: 0,
-      neutraali: 0,
-      huono: 0
-    }
-
-    //this.incCounter = this.incCounter.bind(this)
-  }
-
-  incCounter = (field) => {
-    return () => {
-      this.setState({[field]: this.state[field] + 1})
+      selected: 0
     }
   }
+
  
   render() {
     return (
       <div>
-        <h1>anna palautetta</h1>
-        <Button
-          handleClick={this.incCounter('hyva')}
-          text="hyva"
-        />
-        <Button
-          handleClick={this.incCounter('neutraali')}
-          text="neutraali"
-        />
-        <Button
-          handleClick={this.incCounter('huono')}
-          text="huono"
-        />
-        <Statistics 
-          hyvat={this.state.hyva}
-          huonot={this.state.huono}      
-          neutraalit={this.state.neutraali}
-        /> 
-      </div>  
+        <div>{this.props.anecdotes[this.state.selected]}</div>
+        <div><button onClick={()=>this.setState({selected: getNextIdx()})}>next anecdote</button></div>
+      </div>
     )
   }
 }
 
+ 
+function getNextIdx()  {
+  let val = Math.floor(Math.random()*anecdotes.length)
+  return (val)
+}
+
+const anecdotes = [
+  'If it hurts, do it more often',
+  'Adding manpower to a late software project makes it later!',
+  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+  'Premature optimization is the root of all evil.',
+  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+]
 
 ReactDOM.render(
-  <App />,
+  <App anecdotes={anecdotes} />,
   document.getElementById('root')
 )
