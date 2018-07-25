@@ -18,8 +18,21 @@ class App extends React.Component {
     this.setState({pisteet: uudetPisteet})
   }
 
-  
+  pickMostVoted() {
+    let maxIdx = 0;
+    let maxValue = 0;
+    this.state.pisteet.forEach((value, idx)  => {
+      if (value>maxValue) {
+        maxValue = value;
+        maxIdx = idx;
+      }
+    })
+    return maxIdx
+  }
+
   render() {
+    let maxIdx = this.pickMostVoted();
+
     return (
       <div>
         <div>{this.props.anecdotes[this.state.selected]}</div>
@@ -28,6 +41,9 @@ class App extends React.Component {
               <button onClick={()=>this.addVote()}>vote</button>
               <button onClick={()=>this.setState({selected: getNextIdx()})}>next anecdote</button>
           </div>
+          <h2>anecdote with most votes:</h2>
+          <div>{this.props.anecdotes[maxIdx]}</div>
+          <div>has {this.state.pisteet[maxIdx]} votes</div>
       </div>
     )
   }
