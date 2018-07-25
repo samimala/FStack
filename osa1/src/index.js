@@ -23,7 +23,7 @@ const Statistics = ({hyvat,huonot,neutraalit}) =>  {
   if (maara===0) {
     return(
       <div>
-        <h1>statistiikka</h1>
+        <h1>stataistiikka</h1>
         <div>ei yhtään palautetta annnettu</div>
       </div>
     )
@@ -50,20 +50,13 @@ class App extends React.Component {
       huono: 0
     }
 
-    this.incHyvat = this.incHyvat.bind(this)
-    this.incNeutraalit = this.incNeutraalit.bind(this)
-    this.incHuonot = this.incHuonot.bind(this)
+    //this.incCounter = this.incCounter.bind(this)
   }
 
-  incHyvat() {
-    this.setState({hyva: this.state.hyva + 1})
-  }
-
-  incNeutraalit() {
-    this.setState({neutraali: this.state.neutraali + 1})   
-  }
-  incHuonot() {
-    this.setState({huono: this.state.huono + 1})   
+  incCounter = (field) => {
+    return () => {
+      this.setState({[field]: this.state[field] + 1})
+    }
   }
  
   render() {
@@ -71,18 +64,17 @@ class App extends React.Component {
       <div>
         <h1>anna palautetta</h1>
         <Button
-          handleClick={this.incHyvat}
+          handleClick={this.incCounter('hyva')}
           text="hyva"
         />
         <Button
-          handleClick={this.incNeutraalit}
+          handleClick={this.incCounter('neutraali')}
           text="neutraali"
         />
         <Button
-          handleClick={this.incHuonot}
+          handleClick={this.incCounter('huono')}
           text="huono"
         />
-
         <Statistics 
           hyvat={this.state.hyva}
           huonot={this.state.huono}      
