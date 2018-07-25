@@ -1,79 +1,67 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const Otsikko = (props) => {
-   return (
-       <div>
-        <h1>{props.kurssi.nimi}</h1>
-        </div>
-   )
-}
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      hyva: 0,
+      neutraali: 0,
+      huono: 0
+    }
 
-const Osa = (props) => {
-    return (
-      <div>
-      <p>{props.osa.nimi} {props.osa.tehtavia}</p>
-      </div>
-    ) 
-}
-
-const Sisalto = (props) => {
-  return (
-    <div>
-    <Osa osa={props.kurssi.osat[0]} />
-    <Osa osa={props.kurssi.osat[1]} />
-    <Osa osa={props.kurssi.osat[2]} />
-    </div>
-  ) 
-}
-
-const Yhteensa = (props) => {
-    let yht=0;
-    props.osat.forEach((osa) => {
-      yht += osa.tehtavia
-    })
-    return (
-        <div>
-        <p>yhteensä {yht} tehtävää</p>
-        </div>
-      )  
-}
-
-const App = () => {
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    osat: [
-      {
-        nimi: 'Reactin perusteet',
-        tehtavia: 10
-      },
-      {
-        nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7
-      },
-      {
-        nimi: 'Komponenttien tila',
-        tehtavia: 14
-      }
-    ]
+    this.incHyvat = this.incHyvat.bind(this)
+    this.incNeutraalit = this.incNeutraalit.bind(this)
+    this.incHuonot = this.incHuonot.bind(this)
   }
 
+  incHyvat() {
+    this.setState({hyva: this.state.hyva + 1})
+  }
 
-  return (
-    <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto kurssi={kurssi} />
-      <Yhteensa osat={kurssi.osat} />
-    </div>
-  )
+  incNeutraalit() {
+    this.setState({neutraali: this.state.neutraali + 1})   
+  }
+  incHuonot() {
+    this.setState({huono: this.state.huono + 1})   
+  }
+  
+ 
+  render() {
+    const DisplayTila = () => {
+      return (
+      <div>
+        <h1>statistiikka</h1>
+        
+        <div>hyvä {this.state.hyva}</div>
+        <div>neutraali {this.state.neutraali}</div>
+        <div>huono {this.state.huono}</div>
+        
+      </div>
+      )
+    } 
+  
+    return (
+      <div>
+        <h1>anna palautetta</h1>
+        <div>
+          <button onClick={this.incHyvat}>
+            hyva
+          </button>
+          <button onClick={this.incNeutraalit}>
+            neutraali
+          </button>
+          <button onClick={this.incHuonot}>
+            huono
+          </button>
+        </div>
+        <DisplayTila />
+      </div>  
+    )
+  }
 }
-
-
-
-
 
 ReactDOM.render(
   <App />,
   document.getElementById('root')
 )
-
