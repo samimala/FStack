@@ -20,6 +20,14 @@ const Statistics = ({hyvat,huonot,neutraalit}) =>  {
   let maara = hyvat + neutraalit + huonot
   let keskiarvo = (hyvat-huonot)/maara
   let positiiviset = hyvat*100/maara
+  if (maara===0) {
+    return(
+      <div>
+        <h1>statistiikka</h1>
+        <div>ei yhtään palautetta annnettu</div>
+      </div>
+    )
+  }
   return (
     <div>
       <h1>statistiikka</h1>
